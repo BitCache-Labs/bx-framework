@@ -2,13 +2,14 @@
 
 #include "bx/framework/resources/animation.hpp"
 
-#include <bx/engine/core/serial.serial.hpp>
-#include <bx/engine/core/math.serial.hpp>
-#include <bx/engine/core/resource.serial.hpp>
-#include <bx/engine/containers/string.serial.hpp>
-#include <bx/engine/containers/list.serial.hpp>
-#include <bx/engine/containers/hash_map.serial.hpp>
-#include <bx/engine/containers/tree.serial.hpp>
+#include <bx/core/serial.serial.hpp>
+#include <bx/core/math/math.serial.hpp>
+#include <bx/core/containers/string.serial.hpp>
+#include <bx/core/containers/list.serial.hpp>
+#include <bx/core/containers/hash_map.serial.hpp>
+#include <bx/core/containers/tree.serial.hpp>
+
+#include <bx/engine/resource.serial.hpp>
 
 template<class Archive>
 void serialize(Archive& ar, Animation::PositionKey& data)

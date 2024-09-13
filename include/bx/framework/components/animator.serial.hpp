@@ -5,8 +5,8 @@
 #include "bx/framework/resources/skeleton.serial.hpp"
 #include "bx/framework/resources/animation.serial.hpp"
 
-#include <bx/engine/core/serial.serial.hpp>
-#include <bx/engine/core/math.serial.hpp>
+#include <bx/core/serial.serial.hpp>
+#include <bx/core/math/math.serial.hpp>
 
 template <>
 struct Serial<Animator>

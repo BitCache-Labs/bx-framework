@@ -1,8 +1,8 @@
 #pragma once
 
-#include <bx/engine/core/math.hpp>
-#include <bx/engine/containers/list.hpp>
-#include <bx/engine/modules/graphics.hpp>
+#include <bx/core/math/math.hpp>
+#include <bx/core/containers/list.hpp>
+#include <bx/platform/graphics.hpp>
 
 class Mesh
 {

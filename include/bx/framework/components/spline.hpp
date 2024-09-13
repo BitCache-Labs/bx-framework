@@ -1,7 +1,8 @@
 #pragma once
 
-#include <bx/engine/core/ecs.hpp>
-#include <bx/engine/core/math.hpp>
+#include <bx/core/math/math.hpp>
+
+#include <bx/engine/ecs.hpp>
 
 class Spline : public Component<Spline>
 {

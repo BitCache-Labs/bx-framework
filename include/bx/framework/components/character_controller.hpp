@@ -1,8 +1,8 @@
 #pragma once
 
-#include <bx/engine/core/ecs.hpp>
-#include <bx/engine/core/math.hpp>
-#include <bx/engine/modules/physics.hpp>
+#include <bx/engine/ecs.hpp>
+#include <bx/core/math/math.hpp>
+#include <bx/framework/modules/physics.hpp>
 
 class CharacterController : public Component<CharacterController>
 {

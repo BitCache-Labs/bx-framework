@@ -2,8 +2,8 @@
 
 #include "bx/framework/components/audio_listener.hpp"
 
-#include <bx/engine/core/serial.serial.hpp>
-#include <bx/engine/core/math.serial.hpp>
+#include <bx/core/serial.serial.hpp>
+#include <bx/core/math/math.serial.hpp>
 
 template <>
 struct Serial<AudioListener>

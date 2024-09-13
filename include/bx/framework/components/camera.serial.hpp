@@ -2,7 +2,7 @@
 
 #include "bx/framework/components/camera.hpp"
 
-#include <bx/engine/core/serial.serial.hpp>
+#include <bx/core/serial.serial.hpp>
 
 template <>
 struct Serial<Camera>

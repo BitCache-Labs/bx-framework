@@ -1,9 +1,9 @@
 #pragma once
 
-#include <bx/engine/core/math.hpp>
-#include <bx/engine/containers/string.hpp>
-#include <bx/engine/containers/list.hpp>
-#include <bx/engine/containers/hash_map.hpp>
+#include <bx/core/math/math.hpp>
+#include <bx/core/containers/string.hpp>
+#include <bx/core/containers/list.hpp>
+#include <bx/core/containers/hash_map.hpp>
 
 class Animation
 {

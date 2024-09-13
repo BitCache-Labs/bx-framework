@@ -1,8 +1,8 @@
 #pragma once
 
-#include "bx/engine/core/type.hpp"
-#include "bx/engine/core/math.hpp"
-#include "bx/engine/core/macros.hpp"
+#include <bx/core/type.hpp>
+#include <bx/core/macros.hpp>
+#include <bx/core/math/math.hpp>
 
 using PhysicsHandle = u64;
 constexpr PhysicsHandle PHYSICS_INVALID_HANDLE = -1;

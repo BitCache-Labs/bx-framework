@@ -3,11 +3,13 @@
 #include "bx/framework/resources/shader.hpp"
 #include "bx/framework/resources/texture.hpp"
 
-#include <bx/engine/core/math.hpp>
-#include <bx/engine/core/resource.hpp>
-#include <bx/engine/containers/string.hpp>
-#include <bx/engine/containers/list.hpp>
-#include <bx/engine/modules/graphics.hpp>
+#include <bx/core/math/math.hpp>
+#include <bx/core/containers/string.hpp>
+#include <bx/core/containers/list.hpp>
+
+#include <bx/platform/graphics.hpp>
+
+#include <bx/engine/resource.hpp>
 
 class Material
 {
