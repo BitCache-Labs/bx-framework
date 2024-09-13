@@ -10,3 +10,6 @@
 [submodule "extern/ImGuizmo"]
 	path = extern/ImGuizmo
 	url = https://github.com/CedricGuillemet/ImGuizmo.git
+[submodule "extern/bx-framework-bullet3"]
+	path = extern/bx-framework-bullet3
+	url = https://github.com/BitCache-Labs/bx-framework-bullet3.git
