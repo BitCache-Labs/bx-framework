@@ -4,10 +4,11 @@
 
 #include "bx/framework/resources/mesh.serial.hpp"
 
-#include <bx/engine/core/serial.serial.hpp>
-#include <bx/engine/core/type.serial.hpp>
-#include <bx/engine/core/math.serial.hpp>
-#include <bx/engine/core/resource.serial.hpp>
+#include <bx/core/serial.serial.hpp>
+#include <bx/core/type.serial.hpp>
+#include <bx/core/math/math.serial.hpp>
+
+#include <bx/engine/resource.serial.hpp>
 
 template <>
 struct Serial<Collider>

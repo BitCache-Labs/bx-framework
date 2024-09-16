@@ -6,12 +6,12 @@ set (CMAKE_CXX_STANDARD 11)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Define options for physics backend
-set (BX_PHYSICS_BACKEND "Bullet" CACHE STRING "Choose the physics backend: Bullet")
-set_property (CACHE BX_PHYSICS_BACKEND PROPERTY STRINGS "Bullet" "Custom")
+set (BX_PHYSICS_BACKEND "Bullet3" CACHE STRING "Choose the physics backend: Bullet3")
+set_property (CACHE BX_PHYSICS_BACKEND PROPERTY STRINGS "Bullet3" "Custom")
 message ("BX physics backend: ${BX_PHYSICS_BACKEND}")
 
-if (BX_PHYSICS_BACKEND STREQUAL "Bullet")
-    message(STATUS "Using Bullet as the physics backend")
+if (BX_PHYSICS_BACKEND STREQUAL "Bullet3")
+    message(STATUS "Using Bullet3 as the physics backend")
     add_compile_definitions (BX_PHYSICS_BULLET_BACKEND)
 
 elseif (BX_PHYSICS_BACKEND STREQUAL "Custom")
@@ -45,15 +45,18 @@ set (BX_FRAMEWORK_SRCS
 	"src/bx/framework/components/rigidbody.cpp"
 	"src/bx/framework/components/spline.cpp"
 	"src/bx/framework/components/transform.cpp"
+
 	"src/bx/framework/resources/animation.cpp"
 	"src/bx/framework/resources/material.cpp"
 	"src/bx/framework/resources/mesh.cpp"
 	"src/bx/framework/resources/shader.cpp"
 	"src/bx/framework/resources/skeleton.cpp"
 	"src/bx/framework/resources/texture.cpp"
+
 	"src/bx/framework/systems/renderer.cpp"
 	"src/bx/framework/systems/dynamics.cpp"
 	"src/bx/framework/systems/acoustics.cpp"
+
 	"src/bx/framework/gameobject.cpp"
 )
 
@@ -94,7 +97,16 @@ else ()
 	set (BX_FRAMEWORK_SRCS ${BX_FRAMEWORK_SRCS} "src/bx/framework/game_runtime.cpp")
 endif ()
 
-# Create bx lib
+# Create bx-framework lib
 add_library (bx-framework STATIC ${BX_FRAMEWORK_SRCS})
 target_link_libraries (bx-framework ${BX_FRAMEWORK_LIBS})
 target_include_directories (bx-framework PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+
+
+# Setup physics backend
+if (BX_PHYSICS_BACKEND STREQUAL "Bullet3")
+    target_link_libraries(bx-framework-bullet3 PRIVATE bx-framework)
+
+	target_link_libraries (bx-framework bx-framework-bullet3)
+endif()

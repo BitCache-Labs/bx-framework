@@ -1,9 +1,11 @@
 #include "bx/framework/gameobject.hpp"
 
-#include <bx/engine/core/macros.hpp>
-#include <bx/engine/core/file.hpp>
-#include <bx/engine/core/application.hpp>
-#include <bx/engine/containers/hash_map.hpp>
+#include <bx/core/macros.hpp>
+#include <bx/core/containers/hash_map.hpp>
+
+#include <bx/platform/file.hpp>
+
+#include <bx/engine/application.hpp>
 
 #include <cereal/archives/json.hpp>
 #include <cereal/archives/portable_binary.hpp>
@@ -12,7 +14,6 @@
 #include "bx/framework/systems/acoustics.hpp"
 #include "bx/framework/systems/dynamics.hpp"
 #include "bx/framework/systems/renderer.hpp"
-
 #include "bx/framework/gameobject.serial.hpp"
 
 #include <cstring>

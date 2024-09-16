@@ -1,4 +1,5 @@
 if (BX_PHYSICS_BACKEND STREQUAL "Bullet3")
+	add_subdirectory (bx-framework-bullet3)
 endif ()
 
 if (BX_BUILD_EDITOR)

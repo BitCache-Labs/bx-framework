@@ -1,8 +1,10 @@
 #pragma once
 
-#include <bx/engine/core/ecs.hpp>
-#include <bx/engine/core/math.hpp>
-#include <bx/engine/modules/graphics.hpp>
+#include <bx/core/math/math.hpp>
+
+#include <bx/platform/graphics.hpp>
+
+#include <bx/engine/ecs.hpp>
 
 class Renderer : public System
 {

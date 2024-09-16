@@ -4,9 +4,10 @@
 
 #include "bx/framework/resources/mesh.serial.hpp"
 
-#include <bx/engine/core/serial.serial.hpp>
-#include <bx/engine/core/resource.serial.hpp>
-#include <bx/engine/containers/list.serial.hpp>
+#include <bx/core/serial.serial.hpp>
+#include <bx/core/containers/list.serial.hpp>
+
+#include <bx/engine/resource.serial.hpp>
 
 template <>
 struct Serial<MeshFilter>

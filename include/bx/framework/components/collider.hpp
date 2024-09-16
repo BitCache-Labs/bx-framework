@@ -1,11 +1,12 @@
 #pragma once
 
 #include "bx/framework/resources/mesh.hpp"
+#include "bx/framework/modules/physics.hpp"
 
-#include <bx/engine/core/ecs.hpp>
-#include <bx/engine/core/math.hpp>
-#include <bx/engine/core/resource.hpp>
-#include <bx/engine/modules/physics.hpp>
+#include <bx/core/math/math.hpp>
+
+#include <bx/engine/ecs.hpp>
+#include <bx/engine/resource.hpp>
 
 class Collider : public Component<Collider>
 {

@@ -7,13 +7,15 @@
 #include "bx/framework/components/animator.hpp"
 #include "bx/framework/components/light.hpp"
 
-#include <bx/engine/core/file.hpp>
-#include <bx/engine/core/data.hpp>
-#include <bx/engine/core/profiler.hpp>
-#include <bx/engine/core/resource.hpp>
-#include <bx/engine/containers/tree.hpp>
-#include <bx/engine/modules/graphics.hpp>
-#include <bx/engine/modules/window.hpp>
+#include <bx/core/profiler.hpp>
+#include <bx/core/containers/tree.hpp>
+
+#include <bx/platform/file.hpp>
+#include <bx/platform/graphics.hpp>
+#include <bx/platform/window.hpp>
+
+#include <bx/engine/data.hpp>
+#include <bx/engine/resource.hpp>
 
 struct ViewData
 {

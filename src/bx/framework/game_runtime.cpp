@@ -1,24 +1,26 @@
-#include "bx/runtime/runtime.hpp"
+#include <bx/engine/runtime.hpp>
 
-#include <bx/engine/core/memory.hpp>
-#include <bx/engine/core/log.hpp>
-#include <bx/engine/core/time.hpp>
-#include <bx/engine/core/data.hpp>
-#include <bx/engine/core/profiler.hpp>
-#include <bx/engine/core/file.hpp>
-#include <bx/engine/core/input.hpp>
-#include <bx/engine/core/module.hpp>
-#include <bx/engine/core/ecs.hpp>
-#include <bx/engine/core/resource.hpp>
-#include <bx/engine/core/application.hpp>
-#include <bx/engine/modules/window.hpp>
-#include <bx/engine/modules/graphics.hpp>
-#include <bx/engine/modules/physics.hpp>
-#include <bx/engine/modules/audio.hpp>
-#include <bx/engine/modules/script.hpp>
-#include <bx/engine/modules/imgui.hpp>
+#include <bx/core/memory.hpp>
+#include <bx/core/log.hpp>
+#include <bx/core/time.hpp>
+#include <bx/core/profiler.hpp>
+
+#include <bx/platform/file.hpp>
+#include <bx/platform/input.hpp>
+#include <bx/platform/window.hpp>
+#include <bx/platform/graphics.hpp>
+#include <bx/platform/audio.hpp>
+#include <bx/platform/imgui.hpp>
+
+#include <bx/engine/data.hpp>
+#include <bx/engine/module.hpp>
+#include <bx/engine/ecs.hpp>
+#include <bx/engine/resource.hpp>
+#include <bx/engine/application.hpp>
+#include <bx/engine/script.hpp>
 
 #include <bx/framework/gameobject.hpp>
+#include <bx/framework/modules/physics.hpp>
 
 static bool s_running = true;
 

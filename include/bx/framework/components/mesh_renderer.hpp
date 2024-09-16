@@ -2,9 +2,10 @@
 
 #include "bx/framework/resources/material.hpp"
 
-#include <bx/engine/core/ecs.hpp>
-#include <bx/engine/core/resource.hpp>
-#include <bx/engine/containers/list.hpp>
+#include <bx/core/containers/list.hpp>
+
+#include <bx/engine/resource.hpp>
+#include <bx/engine/ecs.hpp>
 
 ENUM(ShadowCastingMode, OFF, ON, TWO_SIDED, SHADOWS_ONLY);
 

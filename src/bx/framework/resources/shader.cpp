@@ -1,8 +1,8 @@
 #include "bx/framework/resources/shader.hpp"
 #include "bx/framework/resources/shader.serial.hpp"
 
-#include <bx/engine/core/file.hpp>
-#include <bx/engine/modules/graphics.hpp>
+#include <bx/platform/file.hpp>
+#include <bx/platform/graphics.hpp>
 
 #include <cereal/archives/json.hpp>
 #include <cereal/archives/portable_binary.hpp>

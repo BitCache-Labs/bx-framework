@@ -2,8 +2,8 @@
 
 #include "bx/framework/gameobject.hpp"
 
-#include <bx/engine/core/serial.serial.hpp>
-#include <bx/engine/core/ecs.serial.hpp>
+#include <bx/core/serial.serial.hpp>
+#include <bx/engine/ecs.serial.hpp>
 
 template<class Archive>
 void serialize(Archive& ar, GameObjectData& data)
