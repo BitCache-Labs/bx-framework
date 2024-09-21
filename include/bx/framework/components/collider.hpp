@@ -3,7 +3,7 @@
 #include "bx/framework/resources/mesh.hpp"
 #include "bx/framework/modules/physics.hpp"
 
-#include <bx/core/math/math.hpp>
+#include <bx/math/math.hpp>
 
 #include <bx/engine/ecs.hpp>
 #include <bx/engine/resource.hpp>

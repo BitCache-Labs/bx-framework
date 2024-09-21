@@ -3,11 +3,11 @@
 #include "bx/framework/resources/animation.hpp"
 
 #include <bx/core/serial.serial.hpp>
-#include <bx/core/math/math.serial.hpp>
-#include <bx/core/containers/string.serial.hpp>
-#include <bx/core/containers/list.serial.hpp>
-#include <bx/core/containers/hash_map.serial.hpp>
-#include <bx/core/containers/tree.serial.hpp>
+#include <bx/math/math.serial.hpp>
+#include <bx/containers/string.serial.hpp>
+#include <bx/containers/list.serial.hpp>
+#include <bx/containers/hash_map.serial.hpp>
+#include <bx/containers/tree.serial.hpp>
 
 #include <bx/engine/resource.serial.hpp>
 

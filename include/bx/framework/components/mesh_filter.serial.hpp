@@ -5,7 +5,7 @@
 #include "bx/framework/resources/mesh.serial.hpp"
 
 #include <bx/core/serial.serial.hpp>
-#include <bx/core/containers/list.serial.hpp>
+#include <bx/containers/list.serial.hpp>
 
 #include <bx/engine/resource.serial.hpp>
 

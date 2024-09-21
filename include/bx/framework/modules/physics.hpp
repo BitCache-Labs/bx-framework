@@ -2,7 +2,7 @@
 
 #include <bx/core/type.hpp>
 #include <bx/core/macros.hpp>
-#include <bx/core/math/math.hpp>
+#include <bx/math/math.hpp>
 
 using PhysicsHandle = u64;
 constexpr PhysicsHandle PHYSICS_INVALID_HANDLE = -1;

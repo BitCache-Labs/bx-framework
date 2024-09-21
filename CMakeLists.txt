@@ -1,34 +1,14 @@
 cmake_minimum_required (VERSION 3.22)
 
-project (bx-framwork)
-
-set (CMAKE_CXX_STANDARD 11)
-set (CMAKE_CXX_STANDARD_REQUIRED ON)
+project (bx-framework)
 
 # Define options for physics backend
-set (BX_PHYSICS_BACKEND "Bullet3" CACHE STRING "Choose the physics backend: Bullet3")
-set_property (CACHE BX_PHYSICS_BACKEND PROPERTY STRINGS "Bullet3" "Custom")
-message ("BX physics backend: ${BX_PHYSICS_BACKEND}")
-
-if (BX_PHYSICS_BACKEND STREQUAL "Bullet3")
-    message(STATUS "Using Bullet3 as the physics backend")
-    add_compile_definitions (BX_PHYSICS_BULLET_BACKEND)
-
-elseif (BX_PHYSICS_BACKEND STREQUAL "Custom")
-    message(STATUS "Using a custom physics backend")
-    add_compile_definitions (BX_PHYSICS_CUSTOM_BACKEND)
-
-else ()
-    message(FATAL_ERROR "Unknown physics backend: ${WINDOW_BACKEND}")
-endif ()
-
-
+set(BX_PHYSICS_BACKEND "Bullet3" CACHE STRING "Choose the physics backend: Bullet3")
+set_property(CACHE BX_PHYSICS_BACKEND PROPERTY STRINGS "Bullet3" "Custom")
+message(STATUS "BX physics backend: ${BX_PHYSICS_BACKEND}")
 
 # External libraries
-add_subdirectory (extern)
-include_directories (${CMAKE_CURRENT_SOURCE_DIR}/include)
-
-
+add_subdirectory(extern)
 
 # Setup bx-framework library
 set (BX_FRAMEWORK_SRCS
@@ -57,56 +37,44 @@ set (BX_FRAMEWORK_SRCS
 	"src/bx/framework/systems/dynamics.cpp"
 	"src/bx/framework/systems/acoustics.cpp"
 
+	"src/bx/framework/framework.cpp"
 	"src/bx/framework/gameobject.cpp"
 )
 
-set (BX_FRAMEWORK_LIBS bx)
-
-# Setup editor sources
-if (BX_BUILD_EDITOR)
-	set (BX_FRAMEWORK_SRCS ${BX_FRAMEWORK_SRCS}
-		#"src/bx/editor/core/asset_importer.cpp"
-		#"src/bx/editor/core/assets.cpp"
-		#"src/bx/editor/core/command.cpp"
-		#"src/bx/editor/core/selection.cpp"
-		#"src/bx/editor/core/toolbar.cpp"
-		#"src/bx/editor/core/view.cpp"
-		#
-		#"src/bx/editor/gizmos/spline_gizmo.cpp"
-		#"src/bx/editor/gizmos/transform_gizmo.cpp"
-		#
-		#"src/bx/editor/views/assets_view.cpp"
-		#"src/bx/editor/views/console_view.cpp"
-		#"src/bx/editor/views/data_view.cpp"
-		#"src/bx/editor/views/entity_view.cpp"
-		#"src/bx/editor/views/gameobject_view.cpp"
-		#"src/bx/editor/views/inspector_view.cpp"
-		#"src/bx/editor/views/profiler_view.cpp"
-		#"src/bx/editor/views/scene_view.cpp"
-		#"src/bx/editor/views/settings_view.cpp"
-	)
-
-	set (BX_FRAMEWORK_LIBS ${BX_FRAMEWORK_LIBS} stb assimp ImGuizmo) #implot)
-
-	# Add editor runtime
-	set (BX_FRAMEWORK_SRCS ${BX_FRAMEWORK_SRCS} "src/bx/framework/editor/editor_runtime.cpp")
-
-else ()
-	
-	# Add game runtime
-	set (BX_FRAMEWORK_SRCS ${BX_FRAMEWORK_SRCS} "src/bx/framework/game_runtime.cpp")
-endif ()
-
 # Create bx-framework lib
-add_library (bx-framework STATIC ${BX_FRAMEWORK_SRCS})
-target_link_libraries (bx-framework ${BX_FRAMEWORK_LIBS})
-target_include_directories (bx-framework PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+add_library(bx-framework STATIC ${BX_FRAMEWORK_SRCS})
+target_include_directories(bx-framework PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_link_libraries(bx-framework PUBLIC bx-engine)
 
-
+target_compile_definitions(bx-framework PRIVATE BX_FRAMEWORK_PATH="${CMAKE_CURRENT_SOURCE_DIR}")
 
 # Setup physics backend
 if (BX_PHYSICS_BACKEND STREQUAL "Bullet3")
+    message(STATUS "Using Bullet3 as the physics backend")
+    target_compile_definitions(bx-framework PUBLIC BX_PHYSICS_BULLET_BACKEND)
     target_link_libraries(bx-framework-bullet3 PRIVATE bx-framework)
+    target_link_libraries(bx-framework PUBLIC bx-framework-bullet3)
 
-	target_link_libraries (bx-framework bx-framework-bullet3)
+elseif (BX_PHYSICS_BACKEND STREQUAL "Custom")
+    message(STATUS "Using a custom physics backend")
+    target_compile_definitions(bx-framework PUBLIC BX_PHYSICS_CUSTOM_BACKEND)
+
+else()
+    message(FATAL_ERROR "Unknown physics backend: ${BX_PHYSICS_BACKEND}")
+endif()
+
+# Editor sources and libraries
+if (BX_BUILD_EDITOR)
+    target_sources(bx-framework PRIVATE
+		"src/bx/framework/editor/gizmos/spline_gizmo.cpp"
+		"src/bx/framework/editor/gizmos/transform_gizmo.cpp"
+
+		"src/bx/framework/editor/importers/model_importer.cpp"
+		"src/bx/framework/editor/importers/texture_importer.cpp"
+
+		"src/bx/framework/editor/views/gameobject_view.cpp"
+		"src/bx/framework/editor/views/inspector_view.cpp"
+		"src/bx/framework/editor/views/scene_view.cpp"
+	)
+    target_link_libraries(bx-framework PUBLIC stb assimp ImGuizmo)
 endif()

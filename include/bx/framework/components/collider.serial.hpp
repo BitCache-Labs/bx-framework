@@ -6,7 +6,7 @@
 
 #include <bx/core/serial.serial.hpp>
 #include <bx/core/type.serial.hpp>
-#include <bx/core/math/math.serial.hpp>
+#include <bx/math/math.serial.hpp>
 
 #include <bx/engine/resource.serial.hpp>
 

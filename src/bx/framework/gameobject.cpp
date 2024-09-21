@@ -1,11 +1,9 @@
 #include "bx/framework/gameobject.hpp"
 
 #include <bx/core/macros.hpp>
-#include <bx/core/containers/hash_map.hpp>
+#include <bx/containers/hash_map.hpp>
 
 #include <bx/platform/file.hpp>
-
-#include <bx/engine/application.hpp>
 
 #include <cereal/archives/json.hpp>
 #include <cereal/archives/portable_binary.hpp>

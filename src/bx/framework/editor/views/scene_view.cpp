@@ -1,42 +1,42 @@
-#include "Editor/Views/SceneView.hpp"
+#include "bx/framework/editor/views/scene_view.hpp"
 
-#include "Editor/Core/Selection.hpp"
-#include "Editor/Gizmos/TransformGizmo.hpp"
+#include <bx/core/time.hpp>
 
-#include <Engine/Core/Input.hpp>
-#include <Engine/Core/Ecs.hpp>
-#include <Engine/Core/Time.hpp>
-#include <Engine/Core/File.hpp>
-#include <Engine/Core/Data.hpp>
-#include <Engine/Core/Inspector.hpp>
-#include <Engine/Modules/Window.hpp>
-#include <Engine/Modules/Graphics.hpp>
-#include <Engine/Modules/Physics.hpp>
-#include <Engine/Modules/GameObject.hpp>
+#include <bx/platform/input.hpp>
+#include <bx/platform/file.hpp>
+#include <bx/platform/window.hpp>
+#include <bx/platform/graphics.hpp>
+#include <bx/platform/imgui.hpp>
 
-#ifdef GRAPHICS_OPENGL_BACKEND
-#include <Engine/Modules/Graphics/GraphicsOpenGL.hpp>
+#ifdef BX_GRAPHICS_OPENGL_BACKEND
+#include <bx/platform/graphics_opengl.hpp>
 #endif
 
-#include <Framework/Components/Transform.hpp>
-#include <Framework/Components/Camera.hpp>
-#include <Framework/Components/MeshFilter.hpp>
-#include <Framework/Components/MeshRenderer.hpp>
-#include <Framework/Components/Animator.hpp>
-#include <Framework/Components/Collider.hpp>
-#include <Framework/Components/RigidBody.hpp>
-#include <Framework/Components/CharacterController.hpp>
-#include <Framework/Systems/Renderer.hpp>
-#include <Framework/Systems/Dynamics.hpp>
-#include <Framework/Systems/Acoustics.hpp>
+#include <bx/editor/selection.hpp>
+
+#include <bx/engine/ecs.hpp>
+#include <bx/engine/data.hpp>
+#include <bx/engine/inspector.hpp>
+
+#include "bx/framework/gameobject.hpp"
+#include "bx/framework/modules/physics.hpp"
+#include "bx/framework/components/transform.hpp"
+#include "bx/framework/components/camera.hpp"
+#include "bx/framework/components/mesh_filter.hpp"
+#include "bx/framework/components/mesh_renderer.hpp"
+#include "bx/framework/components/animator.hpp"
+#include "bx/framework/components/collider.hpp"
+#include "bx/framework/components/rigidbody.hpp"
+#include "bx/framework/components/character_controller.hpp"
+#include "bx/framework/systems/renderer.hpp"
+#include "bx/framework/systems/dynamics.hpp"
+#include "bx/framework/systems/acoustics.hpp"
+#include "bx/framework/editor/gizmos/transform_gizmo.hpp"
 
 #include <cstring>
 #include <fstream>
 #include <sstream>
 
-#include <imgui.h>
-#define IMGUI_DEFINE_MATH_OPERATORS
-#include <imgui_internal.h>
 #include <ImGuizmo.h>
 #include <IconsFontAwesome5.h>
 
@@ -147,11 +147,11 @@ void SceneView::Initialize()
 
         info.topology = PipelineTopology::TRIANGLES;
         info.faceCull = PipelineFaceCull::CCW;
-        info.depthEnabled = true;
+        info.depthEnable = true;
 
         LayoutElement layoutElems[] =
         {
-            LayoutElement { 0, 0, 3, GraphicsValueType::FLOAT32, false }
+            LayoutElement { 0, 0, 3, GraphicsValueType::FLOAT32, false, 0, 0 }
         };
 
         info.layoutElements = layoutElems;

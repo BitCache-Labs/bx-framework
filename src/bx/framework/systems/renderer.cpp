@@ -8,7 +8,7 @@
 #include "bx/framework/components/light.hpp"
 
 #include <bx/core/profiler.hpp>
-#include <bx/core/containers/tree.hpp>
+#include <bx/containers/tree.hpp>
 
 #include <bx/platform/file.hpp>
 #include <bx/platform/graphics.hpp>

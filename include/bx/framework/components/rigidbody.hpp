@@ -1,7 +1,7 @@
 #pragma once
 
 #include <bx/engine/ecs.hpp>
-#include <bx/core/math/math.hpp>
+#include <bx/math/math.hpp>
 #include <bx/framework/modules/physics.hpp>
 
 class RigidBody : public Component<RigidBody>

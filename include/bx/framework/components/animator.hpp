@@ -3,7 +3,7 @@
 #include "bx/framework/resources/animation.hpp"
 #include "bx/framework/resources/skeleton.hpp"
 
-#include <bx/core/math/math.hpp>
+#include <bx/math/math.hpp>
 #include <bx/platform/graphics.hpp>
 #include <bx/engine/resource.hpp>
 #include <bx/engine/ecs.hpp>

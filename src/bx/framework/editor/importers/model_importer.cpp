@@ -1,25 +1,27 @@
-#include "Editor/Core/AssetImporter.hpp"
+#include "bx/framework/editor/importers/model_importer.hpp"
 
-#include <Engine/Core/File.hpp>
-#include <Engine/Core/Resource.hpp>
-#include <Engine/Containers/List.hpp>
-#include <Engine/Containers/HashMap.hpp>
-#include <Engine/Modules/Graphics.hpp>
+#include <bx/platform/file.hpp>
+#include <bx/engine/resource.hpp>
+#include <bx/containers/list.hpp>
+#include <bx/containers/hash_map.hpp>
+#include <bx/platform/graphics.hpp>
 
-#include <Framework/Resources/Animation.hpp>
-#include <Framework/Resources/Material.hpp>
-#include <Framework/Resources/Mesh.hpp>
-#include <Framework/Resources/Shader.hpp>
-#include <Framework/Resources/Skeleton.hpp>
-#include <Framework/Resources/Texture.hpp>
+#include <bx/framework/resources/animation.hpp>
+#include <bx/framework/resources/material.hpp>
+#include <bx/framework/resources/mesh.hpp>
+#include <bx/framework/resources/shader.hpp>
+#include <bx/framework/resources/skeleton.hpp>
+#include <bx/framework/resources/texture.hpp>
 
 #define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_RESIZE_IMPLEMENTATION
 #include <stb_image.h>
-#include <stb_image_resize.h>
+#include <stb_image_resize2.h>
+
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+
 #include <cstring>
 #include <fstream>
 #include <sstream>
@@ -30,26 +32,6 @@ static Resource<T> ImportResource(const String& filename, const T& data)
     auto res = Resource<T>(Resource<T>::MakeHandle(filename), data);
     res.Save(filename);
     return res;
-}
-
-bool AssetImporter::ImportTexture(const String& filename)
-{
-    Texture texture;
-
-    stbi_set_flip_vertically_on_load(true);
-    auto pData = stbi_load(File::GetPath(filename).c_str(), &texture.width, &texture.height, &texture.channels, 4);
-    if (pData == nullptr)
-        return false;
-
-    texture.channels = 4;
-    texture.depth = 1;
-
-    texture.pixels.resize((i64)texture.width * (i64)texture.height * 4);
-    memcpy(texture.pixels.data(), pData, texture.pixels.size());
-    stbi_image_free(pData);
-
-    auto res = ImportResource(File::RemoveExt(filename) + ".texture", texture);
-    return res.IsValid();
 }
 
 template <typename TData>
@@ -148,7 +130,7 @@ static void AssimpReadHeirarchy(
     for (SizeType c = 0; c < pNode->mNumChildren; ++c)
     {
         const auto pChild = pNode->mChildren[c];
-        
+
         TreeNodeId childId = boneTree.CreateNode(pChild->mName.C_Str());
         boneTree.AddChild(nodeId, childId);
         AssimpReadHeirarchy(boneMap, bones, boneTree, childId, pChild);
@@ -277,7 +259,7 @@ static void AssimpLoadMesh(const aiScene* pScene, const aiNode* pNode, ModelData
         for (SizeType f = 0; f < pMesh->mNumFaces; ++f)
         {
             const auto& face = pMesh->mFaces[f];
-            ENGINE_ASSERT(face.mNumIndices == 3, "Only triangles are supported!");
+            BX_ASSERT(face.mNumIndices == 3, "Only triangles are supported!");
 
             SizeType idx = f * 3;
             triangles[idx + 0] = face.mIndices[0];
@@ -289,7 +271,7 @@ static void AssimpLoadMesh(const aiScene* pScene, const aiNode* pNode, ModelData
         if (pMesh->HasBones())
         {
             // TODO: Handle models with more than one skeleton
-            ENGINE_ENSURE(data.skeletons.size() > 0);
+            BX_ENSURE(data.skeletons.size() > 0);
             auto& skeleton = data.skeletons[0].data;
 
             u32 boneCount = 0;
@@ -299,7 +281,7 @@ static void AssimpLoadMesh(const aiScene* pScene, const aiNode* pNode, ModelData
 
                 String boneName = pBone->mName.C_Str();
                 auto it = skeleton.GetBoneMap().find(boneName);
-                ENGINE_ENSURE(it != skeleton.GetBoneMap().end());
+                BX_ENSURE(it != skeleton.GetBoneMap().end());
 
                 u32 boneIdx = (u32)it->second;
                 for (u32 w = 0; w < pBone->mNumWeights; ++w)
@@ -307,7 +289,7 @@ static void AssimpLoadMesh(const aiScene* pScene, const aiNode* pNode, ModelData
                     auto pWeight = pBone->mWeights[w];
                     u32 vertexId = pWeight.mVertexId;
 
-                    ENGINE_ENSURE(vertexId <= vertices.size());
+                    BX_ENSURE(vertexId <= vertices.size());
 
                     auto& bone = bones[vertexId];
                     auto& weight = weights[vertexId];
@@ -359,7 +341,7 @@ static void AssimpLoadAnimation(const aiAnimation* pAnimation, ModelData& data)
         String channelName = pChannel->mNodeName.C_Str();
 
         Animation::Keyframes keyframes;
-        
+
         for (SizeType p = 0; p < pChannel->mNumPositionKeys; ++p)
         {
             const auto& k = pChannel->mPositionKeys[p];
@@ -401,7 +383,7 @@ static void AssimpLoadAnimation(const aiAnimation* pAnimation, ModelData& data)
     data.animations.emplace_back(entry);
 }
 
-bool AssetImporter::ImportModel(const String& filename)
+bool ModelImporter::Import(const char* ext, const char* filename)
 {
     // Create an instance of the Importer class
     Assimp::Importer importer;
@@ -427,12 +409,12 @@ bool AssetImporter::ImportModel(const String& filename)
     // If the import failed, report it
     if (pScene == nullptr)
     {
-        ENGINE_LOGE("Failed to import model: {} - Message: {}", filename, importer.GetErrorString());
+        BX_LOGE("Failed to import model: {} - Message: {}", filename, importer.GetErrorString());
         return false;
     }
 
     ModelData data{};
-    
+
     // Extract textures
     if (pScene->HasTextures())
     {
@@ -493,7 +475,7 @@ bool AssetImporter::ImportModel(const String& filename)
             //const auto pMesh = pScene->mMeshes[i];
             AssimpLoadMesh(pScene, pScene->mRootNode, data);
         }
-    
+
         for (SizeType i = 0; i < data.meshes.size(); ++i)
         {
             String name = File::RemoveExt(filename) + data.meshes[i].name + "_" + std::to_string(i) + ".mesh";

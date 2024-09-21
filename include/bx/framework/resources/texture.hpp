@@ -1,6 +1,6 @@
 #pragma once
 
-#include <bx/core/math/math.hpp>
+#include <bx/math/math.hpp>
 #include <bx/platform/graphics.hpp>
 
 class Texture

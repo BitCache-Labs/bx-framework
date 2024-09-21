@@ -1,4 +1,4 @@
-#include "Editor/Gizmos/SplineGizmo.hpp"
+#include "bx/framework/editor/gizmos/spline_gizmo.hpp"
 
 void SplineGizmo::Edit(Spline& spl)
 {

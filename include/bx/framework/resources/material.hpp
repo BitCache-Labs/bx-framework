@@ -3,9 +3,9 @@
 #include "bx/framework/resources/shader.hpp"
 #include "bx/framework/resources/texture.hpp"
 
-#include <bx/core/math/math.hpp>
-#include <bx/core/containers/string.hpp>
-#include <bx/core/containers/list.hpp>
+#include <bx/math/math.hpp>
+#include <bx/containers/string.hpp>
+#include <bx/containers/list.hpp>
 
 #include <bx/platform/graphics.hpp>
 

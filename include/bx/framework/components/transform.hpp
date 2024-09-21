@@ -1,8 +1,8 @@
 #pragma once
 
 #include <bx/engine/ecs.hpp>
-#include <bx/core/math/math.hpp>
-#include <bx/core/containers/string.hpp>
+#include <bx/math/math.hpp>
+#include <bx/containers/string.hpp>
 
 class Transform : public Component<Transform>
 {

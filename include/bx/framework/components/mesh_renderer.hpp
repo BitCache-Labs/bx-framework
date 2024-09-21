@@ -2,7 +2,7 @@
 
 #include "bx/framework/resources/material.hpp"
 
-#include <bx/core/containers/list.hpp>
+#include <bx/containers/list.hpp>
 
 #include <bx/engine/resource.hpp>
 #include <bx/engine/ecs.hpp>
