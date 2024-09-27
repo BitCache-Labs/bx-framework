@@ -40,6 +40,7 @@
 #include <ImGuizmo.h>
 #include <IconsFontAwesome5.h>
 
+#ifdef OLD_SCENEVIEW
 #define SCENE_PAYLOAD_HEADER "SCEN"
 
 static Vec2 s_mousePos;
@@ -643,3 +644,4 @@ void SceneView::Present(bool& show)
         Entity(deletedId).Destroy();
     }
 }
+#endif

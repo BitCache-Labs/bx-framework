@@ -20,7 +20,3 @@ void Framework::Shutdown()
 void Framework::Reload()
 {
 }
-
-void Framework::Tick()
-{
-}
